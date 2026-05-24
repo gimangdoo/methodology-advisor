@@ -126,7 +126,8 @@ Current: `0.2.0`.
 
 ## Roadmap
 
-See [ROADMAP.md](./ROADMAP.md) for remaining work (dharness schema patch, e2e operational verification, synergy table expansion, v0.3+ deferred items).
+- [ROADMAP.md](./ROADMAP.md) — high-level tracker (what + why + status) for the three remaining tracks.
+- [PLAN.md](./PLAN.md) — detailed execution plan (steps + acceptance + deliverables + effort + dependencies + risks).
 
 ---
 
