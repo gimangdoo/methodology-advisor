@@ -124,6 +124,12 @@ Current: `0.2.0`.
 
 ---
 
+## Roadmap
+
+See [ROADMAP.md](./ROADMAP.md) for remaining work (dharness schema patch, e2e operational verification, synergy table expansion, v0.3+ deferred items).
+
+---
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
