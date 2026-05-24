@@ -247,6 +247,99 @@
 
 ---
 
-## 부록: 자유 입력 fallback
+## 부록 §1: 자유 입력 fallback
 
 위 24개 외 방법론(예: Pair Programming, Mob Programming, Cathedral & Bazaar, Lean Startup, Outside-In TDD, etc.) → catalog 미박제 항목으로 표시 + LLM 자유 추천 + `[catalog-miss]` sigil 박제. 반복 추천 누적 시 catalog 신규 항목 박제 후보.
+
+---
+
+## 부록 §2: Hybrid 합성 doctrine
+
+> **Read at phase:** Phase 1 (충돌 검출) + Phase 2 (top-3 시너지·충돌 1줄 박제) + Phase 4 (합성 1줄)
+
+실 프로젝트는 단일 방법론 X — 4축 조합이 default. 본 §2 = 조합 합성 doctrine + 충돌 표 + 시너지 표.
+
+### §2.1 4축 조합 doctrine
+
+추천 결과 = 다음 4축에서 0~1개씩 선택 (최대 4개 박제):
+
+| 축 | 카테고리 | 선택 가이드 |
+|----|---------|----------|
+| 설계 | §1 (DDD / Modular Monolith / Microservices / Hexagonal / Clean / MVC·MVP·MVVM) | 도메인 복잡도·팀 규모·배포 단위 기반. solo·PoC = 생략 가능. |
+| 테스트 | §2 (TDD / BDD / ATDD / Test Pyramid / Snapshot / Property-based / Contract) | quality_target·도메인 위험도 기반. default = Test Pyramid. |
+| 워크플로우 | §3 (Trunk-based / GitFlow / GitHub Flow / Release Train / Feature Toggle) | team 규모·CI 성숙도·배포 주기 기반. default = GitHub Flow. |
+| PM | §4 (Kanban / Scrum / Shape Up / Spec-driven / RFC-driven / Event Storming) | stakeholder 수·계획 주기 기반. default = Kanban. **dharness 외부 박제.** |
+
+**doctrine 룰:**
+1. **축당 최대 1개** — 동축 2개 박제 = 모순 (예: Kanban + Scrum 동시 박제 금지, §2.2 표 참조)
+2. **최대 4개 박제** — 1줄 합성에 4개 초과 시 핵심 1~3개만, 나머지는 catalog 참조로 evolve 단계 박제
+3. **PoC·solo는 설계·PM 생략 가능** — TDD + GitHub Flow 2개로 충분한 경우 多
+4. **Spec-driven + Event Storming + RFC-driven은 PM 축 충돌 가능** — §2.2 표 검출
+
+### §2.2 상호 배타 표 (충돌 조합)
+
+| 충돌 쌍 | 사유 | 회피 룰 |
+|--------|------|--------|
+| Kanban × Scrum | continuous flow vs fixed sprint — 동일 PM 축 | 둘 중 1개만 박제 |
+| Kanban × Shape Up | continuous flow vs 6주 cycle — 동일 PM 축 | 둘 중 1개만 박제 |
+| Scrum × Shape Up | sprint 2-4주 vs cycle 6주 — 주기 모순 | 둘 중 1개만 박제 |
+| GitFlow × Trunk-based | long-lived branch vs single trunk — 워크플로우 모순 | Trunk-based 우선 (대부분 신규 프로젝트 적합) |
+| GitFlow × GitHub Flow | 다층 branch vs short-lived branch — 워크플로우 모순 | GitHub Flow 우선 (SaaS·OSS) |
+| Microservices × Modular Monolith | 분산 배포 vs 단일 배포 — 설계 모순 | scale ≥ large_team + 분산 신호 시 Microservices, 아니면 Modular Monolith |
+| MVC·MVP·MVVM 다중 박제 | 동일 UI 패턴 변형 — 동축 충돌 | 프레임워크 default 1개 박제 (Rails=MVC, Android=MVVM 등) |
+| Release Train × GitHub Flow | 고정 주기 vs PR 머지=배포 — 워크플로우 모순 | scale + 다중 팀 동기화 신호 시 Release Train |
+| Snapshot only × TDD | 회귀 검출 vs 사전 spec — 테스트 깊이 모순 (snapshot only는 spec 부재) | TDD + Snapshot 보조는 가능, Snapshot 단독 X |
+
+**충돌 ≠ 절대 금지** — 사용자 명시 시 `[conflict-override]` sigil 박제 후 진행. matrix·advisor는 default로 회피.
+
+### §2.3 시너지 표 (검증된 조합)
+
+| 조합 | 시너지 사유 | 적합 시나리오 |
+|------|-----------|------------|
+| DDD + TDD | 도메인 모델 안정성 + 리팩토링 안전망 | greenfield, 도메인 복잡 ↑ |
+| DDD + Hexagonal | bounded context + 외부 의존 격리 | 외부 시스템 의존 ↑, 인프라 교체 가능성 |
+| DDD + Event Storming | 도메인 발굴 → 모델 정확도 ↑ | 다도메인, 도메인 전문가 참여 |
+| DDD + Clean Architecture | bounded context + 의존 방향 단방향 | 장기 유지보수, 복잡 도메인 |
+| TDD + Trunk-based | 빠른 피드백 + CI 게이트 | small·medium team, CI 성숙 |
+| TDD + BDD | 단위 안정 + 행위 명세 | 비기술 stakeholder, 비즈니스 룰 복잡 |
+| BDD + ATDD | spec → 인수 → 구현 단방향 | 고객 검수, compliance |
+| Microservices + Contract testing | 통합 회귀 검출 | 진짜 분산, large team |
+| Microservices + Release Train | 다중 서비스 동기화 | large team, 엔터프라이즈 |
+| Trunk-based + Feature Toggle | 점진 rollout + dark launch | SaaS, 연속 배포 |
+| Modular Monolith + DDD-lite | 모듈 경계 + 도메인 박제 (운영 비용 ↓) | small·medium team, 향후 microservice 옵션 |
+| Spec-driven + Contract testing | OpenAPI 박제 + 양방향 검증 | API 중심, 다중 소비자 |
+| Component-driven + Snapshot + Visual regression | UI 회귀 검출 3단계 | frontend 중심 |
+| RFC-driven + Trunk-based + Test Pyramid | OSS 표준 조합 | public_oss, 분산 contributor |
+| Characterization + 점진 TDD + Feature Toggle | brownfield 안전 진입 3단계 | brownfield, test_coverage ↓ |
+
+**default 시너지:** 시너지 표 미박제 조합도 valid — §2.2 충돌 표 검출 안 되면 사용 가능. 시너지 표는 "검증된 조합" 우선 추천 가이드.
+
+### §2.4 합성 출력 형식 (Phase 2·4 참조)
+
+Phase 2 top-3 출력 시 각 후보에 **시너지·충돌 1줄** 박제:
+
+```
+1. DDD + TDD + GitHub Flow (matrix R6)
+   - 시너지: DDD+TDD = 도메인 모델 안정성 (§2.3); TDD+GitHub Flow = PR 게이트 검증
+   - 충돌: 없음
+   - dharness 매핑: Phase 4 "계층적 위임" + reviewer test-부재-fail
+```
+
+`[conflict-detected]` sigil 박제 시:
+
+```
+2. Microservices + Modular Monolith (matrix-miss)
+   - 시너지: -
+   - 충돌: Microservices × Modular Monolith (§2.2) — 배포 단위 모순 [conflict-detected]
+   - 권장: scale 신호 재확인 → 1개 선택 후 재합성
+```
+
+Phase 4 합성 1줄 = 4축 조합 박제 (단일 박제 시도 시 사용자 게이트로 의도 확인):
+
+```
+✓ "환자 데이터 SaaS, small team 5명, DDD + TDD + GitHub Flow + Spec-driven으로 진행. HIPAA 준수, 12개월."
+   → 설계=DDD, 테스트=TDD, 워크플로우=GitHub Flow, PM=Spec-driven (4축 박제)
+
+✗ "환자 데이터 SaaS, TDD로 진행." (단일 박제)
+   → 단일 박제 의도 확인 게이트: "설계·워크플로우·PM 축 박제 생략 의도 맞나요?"
+```

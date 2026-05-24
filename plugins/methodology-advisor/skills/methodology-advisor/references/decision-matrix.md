@@ -11,6 +11,11 @@
 1. **Exact match** — 신호 조합이 row와 정확히 일치 → 해당 row 추천 채택
 2. **Partial match (≥3 신호 일치)** — top-3 후보 정렬, 일치 수 ↑ 우선
 3. **No match** — `[matrix-miss]` sigil + LLM fallback (catalog 적합/부적합 신호 cross-check)
+4. **충돌 검출 (top-3 출력 전 필수)** — `methodology-catalog.md §부록 §2.2` 상호 배타 표와 cross-check:
+   - 후보 내 충돌 쌍 존재 → `[conflict-detected]` sigil 박제 + 회피 룰 적용 (표 §2.2 "회피 룰" 컬럼 따름)
+   - 회피 룰 적용 후 후보 = 유효 조합으로 재정렬
+   - 사용자 명시 override 시 `[conflict-override]` sigil 박제 후 유지
+5. **시너지 강화 (top-3 출력 시 박제)** — 후보 조합이 `§2.3` 시너지 표에 박제된 검증 조합과 일치 → 시너지 사유 1줄 박제
 
 매칭 시 신호 우선순위: `purpose` > `scale` > `project_type` > `constraints` > `timeline`.
 
@@ -53,21 +58,25 @@
 2. **유지비 ↓ 우선** — Microservices vs Modular Monolith 동점 → Modular Monolith 우선 (운영 비용 ↓)
 3. **dharness 매핑 명확도 우선** — Phase 4 6패턴과 직결되는 방법론 우선 (DDD ↔ 계층적 위임, TDD ↔ 생성-검증)
 4. **catalog 적합 신호 일치 수 우선** — Phase 0 수집 신호와 catalog 적합 신호 일치 ↑ 우선
+5. **시너지 표 박제 조합 우선** — 동점 시 `methodology-catalog.md §부록 §2.3` 시너지 표 박제 조합이 미박제 조합보다 우선
 
 ---
 
 ## `[matrix-miss]` fallback 룰
 
-매칭 row 없음 시:
+매칭 row 없음 시 4축 합성 doctrine (`methodology-catalog.md §부록 §2.1`) 적용:
 
 1. 사용자 신호를 catalog 4축에 직접 매핑:
-   - 설계 1개 선택 (project 규모·도메인 복잡도 기반)
+   - 설계 1개 선택 (project 규모·도메인 복잡도 기반, solo·PoC = 생략 가능)
    - 테스트 1개 선택 (test_rigor 신호 기반, 기본 = Test Pyramid)
    - 워크플로우 1개 선택 (team.size + CI 성숙도 기반, 기본 = GitHub Flow)
    - PM 1개 선택 (timeline.horizon + stakeholder 수 기반, 기본 = Kanban)
 2. 4축 조합 = top-1 추천
 3. 1개 축을 다른 옵션으로 교체 = top-2, top-3
-4. 출력에 `[matrix-miss]` sigil 박제 — 사용자가 결정적 룰 부재 인지
+4. **충돌 검출 step 4 실행** — top-3에 §2.2 충돌 쌍 없는지 cross-check
+5. 출력에 `[matrix-miss]` sigil 박제 — 사용자가 결정적 룰 부재 인지
+
+**도크트린:** 4축 합성 = matrix-hit 케이스에도 동일 적용 — matrix row 추천도 결국 4축 조합으로 환원 가능. matrix는 단지 검증된 4축 조합 캐시.
 
 ---
 

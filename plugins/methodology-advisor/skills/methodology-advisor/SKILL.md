@@ -52,16 +52,19 @@ dharness-sub 모드 진입 신호:
 1. **결정적 매치 우선** — 신호 조합이 matrix row와 정확히 일치 시 해당 row의 추천 채택
 2. **부분 매치** — 일치하는 신호 ≥3개 row를 후보로 수집 → top-3 정렬
 3. **매치 0** — `[matrix-miss]` sigil 박제 + LLM 자유 추천 fallback (적합 신호·부적합 신호를 catalog와 cross-check)
+4. **충돌 검출 (필수)** — top-3 출력 전 `methodology-catalog.md §부록 §2.2` 상호 배타 표와 cross-check → 충돌 시 `[conflict-detected]` sigil + 회피 룰 적용
+5. **시너지 강화** — top-3 조합이 `§2.3` 시너지 표와 일치 시 시너지 사유 1줄 박제
 
 ### Phase 2: top-3 후보 + tradeoff 출력
 
-각 후보에 대해 다음 5개 항목을 1줄씩 출력:
+각 후보에 대해 다음 6개 항목을 1줄씩 출력:
 
 | 항목 | 형식 |
 |------|------|
-| 방법론 조합 | 1~3개 결합 (예: "DDD + TDD + Trunk-based") |
+| 방법론 조합 | 4축 박제 (설계·테스트·워크플로우·PM 중 0~4개, 최대 4개) — 예: "DDD + TDD + Trunk-based + Kanban" |
 | 한 줄 정의 | catalog에서 인용 |
 | 적합 사유 | 사용자 신호 → 방법론 적합도 매핑 |
+| **시너지·충돌** | `§2.3` 시너지 박제 조합 + `§2.2` 충돌 sigil — 충돌 시 회피 룰 1줄 |
 | 비용 | 학습 곡선 / 초기 속도 / 장기 속도 |
 | dharness 매핑 | intent_profile 필드 + Phase 4 패턴 |
 
@@ -77,11 +80,15 @@ dharness-sub 모드 진입 신호:
 
 ### Phase 4: dharness 인계 발화 합성 (standalone 모드)
 
-`references/handoff-template.md` 패턴으로 합성 1줄 생성:
+`references/handoff-template.md` 패턴으로 합성 1줄 생성. **4축 합성 doctrine (`methodology-catalog.md §부록 §2.1`) 적용:**
 
 ```
-{core_feature 한 문장}, {scale}, {확정 방법론}로 진행. {부가 제약 1줄}.
+{core_feature 한 문장}, {scale}, {확정 방법론 4축 박제}로 진행. {부가 제약 1줄}.
 ```
+
+- 축당 최대 1개 박제 (동축 2개 = 모순, §2.2 검출)
+- 최대 4개 박제 (1줄에 4개 초과 시 핵심 1~3개만, 나머지 = evolve 단계)
+- 단일 박제 (1개만) 시 의도 확인 게이트 발동 ("축 박제 생략 의도 맞나요?")
 
 **출력 형식 (사용자에게 제시):**
 
@@ -190,8 +197,8 @@ advisor 출력이 dharness intent_profile enum과 1:1 매핑되어야 handoff �
 
 ## 참고
 
-- `references/methodology-catalog.md` — 방법론 24개 정의·신호·dharness 매핑·비용·보완
-- `references/decision-matrix.md` — 신호 → 추천 결정 룰 매트릭스
+- `references/methodology-catalog.md` — 방법론 24개 정의·신호·dharness 매핑·비용·보완 + 부록 §2 hybrid 합성 doctrine (4축·충돌·시너지)
+- `references/decision-matrix.md` — 신호 → 추천 결정 룰 매트릭스 + 충돌 검출 step
 - `references/handoff-template.md` — dharness 인계 발화 합성 패턴 + intent_profile enum 매핑 표
 - dharness `references/grilling-loop.md` — 1q-at-a-time + 추천 답안 패턴 원본 (Phase 0에서 차용)
 - dharness `references/intent-profile-schema.md` — handoff 매핑 대상 schema

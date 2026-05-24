@@ -41,10 +41,12 @@ advisor 추천 결과 → dharness factory 입력으로 변환하는 합성 패�
 
 ### 합성 룰
 
-1. **방법론 조합 최대 3개** — 초과 시 핵심 1~3개만 박제, 나머지는 catalog 참조로 사용자가 evolve 단계 박제
-2. **PM 방법론(Kanban/Scrum/Shape Up)은 1줄에 1개만** — 중복 시 모순 (Kanban + Scrum 동시 박제 금지)
+1. **방법론 조합 최대 4개** — 4축 doctrine (`methodology-catalog.md §부록 §2.1`): 설계 0~1 + 테스트 0~1 + 워크플로우 0~1 + PM 0~1. 4개 초과 시 핵심 1~3개만 박제, 나머지는 evolve 단계.
+2. **축당 주 방법론 1개** — 동축 주 방법론 2개 = 모순 (Kanban + Scrum, GitFlow + Trunk-based, Microservices + Modular Monolith 등 — §2.2 충돌 표 cross-check). 보조 패턴 (Hexagonal·Clean·Event Storming·Characterization 등) 추가 박제 가능 — 단 §2.3 시너지 표 박제 조합에 한함.
 3. **부가 제약 = 도메인 한 문장 추가 정보** — timeline, compliance, 핫스팟, stakeholder 등
 4. **dharness Phase 2 자동 추론 가능한 신호 우선 박제** — `quality.test_rigor`, `constraints.compliance.regulatory`, `architecture.deployment_target` enum과 직접 매핑되는 키워드 사용
+5. **4축 합성 doctrine 격상 (v0.2.0)** — 단일 박제 (1개만) 시 사용자 게이트 발동: "설계·테스트·워크플로우·PM 중 N개 축 박제 생략 의도 맞나요?" — solo·PoC만 1~2개 박제 default 허용, 그 외 ≥3축 박제 권장
+6. **시너지 표 박제 조합 우선** — §2.3 검증 조합과 일치 시 합성 1줄에 우선 박제 (반대는 `[unverified-combo]` sigil 박제)
 
 ### 사용자 출력 형식
 
