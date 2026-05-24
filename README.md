@@ -60,7 +60,11 @@ Or point at a local clone:
 "전자상거래 백엔드 신규 구축, small team 5명. 방법론 추천해줘."
 ```
 
-The skill auto-loads, runs Phase 0–4, and prints a synthesized sentence ready for dharness.
+The skill auto-loads, runs Phase 0–4, and prints a synthesized sentence ready for dharness. Sample output (from [tests/manual/e2e-trigger.md](./tests/manual/e2e-trigger.md), v0.3.0):
+
+```
+"전자상거래 백엔드 신규 구축, small team 5명, DDD + TDD + GitHub Flow + Spec-driven으로 진행. PCI-DSS 준수, 3-12개월."
+```
 
 ### Slash command (one-shot chain)
 

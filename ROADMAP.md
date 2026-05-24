@@ -69,7 +69,7 @@ patch spec: [docs/dharness-patch-spec.md](./docs/dharness-patch-spec.md) §A2.
 ### B1. e2e 운영 검증 `[STATUS: partial]`
 
 - B1-static: `[done]` (tests/static/B1-static-2026-05-24.md)
-- B1.1 자연어 trigger: `[script-ready]` ([tests/manual/scenarios.md](./tests/manual/scenarios.md) §S1, 사용자 실행 대기)
+- B1.1 자연어 trigger: `[done]` ([tests/manual/e2e-trigger.md](./tests/manual/e2e-trigger.md), 16 PASS / 1 partial-fail / 1 N/A — v0.3.0 시너지 확장 효과 실 검증됨)
 - B1.2 wrapper command: `[script-ready]` (§S2, 사용자 실행 대기)
 - B1.3 dharness-sub: `[script-ready, blocked]` (§S3 시뮬레이션은 가능, 실 통합 검증은 Track A 의존)
 - B1.4 실패 케이스 4종: `[script-ready]` (§S4, 사용자 실행 대기)
