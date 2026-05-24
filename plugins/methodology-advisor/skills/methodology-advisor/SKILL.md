@@ -1,6 +1,6 @@
 ---
 name: methodology-advisor
-description: "프로젝트 구조·목적·기능·규모를 입력받아 적합한 소프트웨어 개발 방법론(TDD/DDD/BDD/Spec-driven/Kanban/Trunk-based 등)을 추천. 사용자가 방법론을 모를 때 1q-at-a-time + 추천 답안 패턴으로 신호 수집. 산출물 = dharness factory에 그대로 전달 가능한 합성 1줄. 트리거: '방법론 추천', '어떤 방식으로 진행', '뭘 쓸지 모르겠음', '프로젝트 시작 어떻게', 'dharness 시작 전', 'TDD/DDD 골라줘', '개발 방식 선택', '프로세스 정해줘'. should-NOT 트리거: 이미 방법론 명시된 발화, 코드 리뷰, 디버깅, 단일 라이브러리 추천."
+description: "프로젝트 구조·목적·기능·규모를 입력받아 적합한 소프트웨어 개발 방법론(TDD/DDD/BDD/Spec-driven/Kanban/Trunk-based 등)을 추천. 사용자가 방법론을 모를 때 1q-at-a-time + 추천 답안 패턴으로 신호 수집. 산출물 = dharness factory에 그대로 전달 가능한 합성 1줄. 트리거: '방법론 추천', '어떤 방식으로 진행', '뭘 쓸지 모르겠음', '프로젝트 시작 어떻게', 'dharness 시작 전', 'TDD/DDD/BDD 골라줘', '개발 방식 선택', '프로세스 정해줘', '프로세스 가이드'. should-NOT 트리거: 이미 방법론 명시된 발화, 코드 리뷰, 디버깅, 단일 라이브러리 추천, 도구 선택(Slack vs Discord 등), 코드 검토(이거 DDD 맞아 등), 방법론 개념 질문(TDD가 뭐야 등), harness-status 영역."
 ---
 
 # Methodology Advisor
@@ -115,7 +115,7 @@ intent_profile_patch:
     test_rigor: tdd                    # advisor 추천 enum
   workflow:
     methodology: ["DDD", "TDD", "Trunk-based"]   # 추천 조합
-    methodology_source: "methodology-advisor v0.2.0 (matrix-hit / matrix-miss)"
+    methodology_source: "methodology-advisor v0.3.0 (matrix-hit / matrix-miss)"
 meta:
   open_questions: []                   # advisor가 해결한 질문 박제
   user_confirmed_fields:
@@ -137,7 +137,9 @@ dharness Phase 2가 이 yaml을 read → `intent_profile.md` frontmatter에 merg
 | `_workspace/_advisor/{ts}_recommendation.md` | Phase 2 top-3 + Phase 3 사용자 확정 |
 | `_workspace/_advisor/{ts}_handoff.md` | Phase 4 합성 1줄 + 옵션 A/B/C |
 
-**워크스페이스 디렉토리 미존재 시:** 사용자 프로젝트 루트에 `_workspace/_advisor/` 생성. dharness factory가 같은 `_workspace/` 사용 → 공존 안전.
+**워크스페이스 디렉토리 미존재 시:** Phase 4 직전에 Bash로 `mkdir -p _workspace/_advisor/` 실행 후 Write로 산출물 박제. dharness factory가 같은 `_workspace/` 사용 → 공존 안전.
+
+**dharness-sub 모드 산출물:** Phase 4-sub에서 `_workspace/_advisor/{ts}_handoff_sub.yaml` 박제 (standalone 3 파일 대신). dharness가 yaml을 read → `intent_profile.md` frontmatter merge.
 
 ---
 

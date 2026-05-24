@@ -120,7 +120,7 @@ Runs the advisor, prompts for confirmation, then automatically calls `/harness:h
 
 Semantic versioning. Catalog or matrix edits that change recommendation behavior bump the minor version. Schema-breaking handoff format changes bump the major version (and require a dharness-side update).
 
-Current: `0.2.0`.
+Current: `0.3.0`.
 
 ---
 

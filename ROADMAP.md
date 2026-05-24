@@ -1,6 +1,6 @@
 # Roadmap
 
-`methodology-advisor` 잔존 작업 트래커. 박제 시점: 2026-05-24 (v0.2.0 release 직후).
+`methodology-advisor` 잔존 작업 트래커. 박제 시점: 2026-05-24 (v0.3.0 release 직후).
 
 세 트랙으로 분리 박제:
 
@@ -14,9 +14,11 @@
 
 ## 현재 상태 (2026-05-24)
 
-- v0.2.0 tag origin 푸시 완료
+- v0.3.0 tag origin 푸시 대기 (commit 박제 완료)
 - 플러그인 코드 박제 완료 (skill + 3 references + command + marketplace)
-- 본 시점 이후 실 사용·운영 데이터 0건
+- B1-static 정합성 점검 완료 (tests/static/B1-static-2026-05-24.md)
+- B2 시너지 표 +10 셀 박제 완료 (catalog §2.3: 15 → 25)
+- 본 시점 이후 실 사용·운영 데이터 0건 — B1-runtime 미수행
 
 ---
 
@@ -62,7 +64,13 @@ dharness Phase 2가 `workflow.methodology` 미박제 시 → `/methodology-advis
 
 ## Track B: 본 repo 내 actionable
 
-### B1. e2e 운영 검증 `[STATUS: pending]`
+### B1. e2e 운영 검증 `[STATUS: partial]`
+
+- B1-static: `[done]` (tests/static/B1-static-2026-05-24.md)
+- B1.1 자연어 trigger: `[pending]` (사용자 환경 필요)
+- B1.2 wrapper command: `[pending]` (사용자 환경 필요)
+- B1.3 dharness-sub: `[blocked]` (Track A1·A2 의존)
+- B1.4 실패 케이스 4종: `[pending]` (사용자 환경 필요)
 
 본 plugin 코드는 1회도 실 실행 안 됨. 다음 시나리오 1회 dryrun + 결과 박제.
 
@@ -98,7 +106,7 @@ dharness Phase 2가 `workflow.methodology` 미박제 시 → `/methodology-advis
 - 발견 버그 issue로 박제
 - README "Usage" 섹션에 실 출력 예시 1개 박제
 
-### B2. 시너지 표 확장 `[STATUS: pending]` (v0.3.0 target)
+### B2. 시너지 표 확장 `[STATUS: done]` (v0.3.0)
 
 현재 `methodology-catalog.md §부록 §2.3` = 15셀. matrix 20행에 등장하나 시너지 표 미박제 조합 cross-check:
 

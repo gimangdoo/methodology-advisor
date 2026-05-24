@@ -2,6 +2,47 @@
 
 All notable changes to this plugin are documented in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] — 2026-05-24
+
+B1-static 정합성 점검 + B2 시너지 표 확장 + advisory gap 4건 박제. v0.2.0 release 당일 즉시 후속 patch.
+
+### Added
+
+- `methodology-catalog.md §부록 §2.3` 시너지 표 +10 셀 (15 → 25):
+  - TDD + GitHub Flow (R4·R6·R10 빈출)
+  - DDD + GitHub Flow (R6)
+  - Modular Monolith + Hexagonal (R5)
+  - DDD + Modular Monolith (R8)
+  - TDD + Feature Toggle (R14·R15)
+  - TDD + Kanban (R4)
+  - Spec-driven + Trunk-based (R9·R13)
+  - MVC + Snapshot + Kanban (R10)
+  - Hexagonal + Contract testing (R17)
+  - Event Storming + Snapshot (R17)
+- `advise-and-build.md` frontmatter `allowed-tools: ["SlashCommand", "Read", "Write", "Bash", "Glob", "Grep"]` 박제 (명시적 도구 권한)
+- `SKILL.md` 산출물 §에 mkdir 명시 + dharness-sub 산출물명 (`_handoff_sub.yaml`) 박제
+- `PLAN.md` 신설 (전 트랙 상세 실행 계획 — Goal/Steps/Acceptance/Deliverables/Effort/Deps/Risks)
+- `ROADMAP.md` 신설 (전 트랙 high-level 트래커)
+- `tests/static/B1-static-2026-05-24.md` 박제 (정적 정합성 점검 보고)
+
+### Changed
+
+- `SKILL.md` description 트리거 키워드 확장:
+  - should-trigger +2: "TDD/DDD/BDD 골라줘" (BDD 추가), "프로세스 가이드"
+  - should-NOT-trigger +4: 도구 선택, 코드 검토, 방법론 개념 질문, harness-status 영역
+- version literal `v0.2.0` → `v0.3.0` (plugin.json, marketplace.json, SKILL.md, handoff-template.md, README)
+
+### Fixed
+
+- version literal drift `v0.1.0` → `v0.2.0` (SKILL.md L118, handoff-template.md L73·L81) — v0.2.0 release 시점 박제 누락 (commit `55ea3ed`에서 우선 fix 후 본 릴리스에 박제)
+- `advise-and-build.md` L41 dangling wikilink `[[project-dharness-handoff-ica-absorption]]` 제거 — published doc에 내부 memory slug leak 차단
+
+### Known limitations
+
+- `workflow.methodology` enum 박제는 dharness 측 schema patch 미진행 (v0.1.0·v0.2.0과 동일, Track A 의존)
+- B1-runtime e2e dryrun 미수행 — 사용자 환경에서 진행 필요 (PLAN.md §B1-runtime 박제)
+- `[matrix-miss]` 시 LLM fallback 비재현 (Track C1 의존)
+
 ## [0.2.0] — 2026-05-24
 
 Hybrid composition doctrine 박제. 실 프로젝트의 단일 방법론 X, 4축 조합 default 명시.

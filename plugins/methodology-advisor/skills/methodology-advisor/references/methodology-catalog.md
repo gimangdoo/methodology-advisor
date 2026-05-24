@@ -311,6 +311,16 @@
 | Component-driven + Snapshot + Visual regression | UI 회귀 검출 3단계 | frontend 중심 |
 | RFC-driven + Trunk-based + Test Pyramid | OSS 표준 조합 | public_oss, 분산 contributor |
 | Characterization + 점진 TDD + Feature Toggle | brownfield 안전 진입 3단계 | brownfield, test_coverage ↓ |
+| TDD + GitHub Flow | 단위 안정 + PR 게이트 검증 | small·medium team default, matrix R4·R6·R10 빈출 |
+| DDD + GitHub Flow | bounded context 변경 단위 = PR 단위 | greenfield 도메인 복잡, matrix R6 |
+| Modular Monolith + Hexagonal | 모듈 경계 + 외부 의존 격리 (운영 비용 ↓) | solo·small long timeline, matrix R5 |
+| DDD + Modular Monolith | bounded context 박제 + 단일 배포 | medium team 정석, matrix R8 |
+| TDD + Feature Toggle | 회귀 안전망 + 점진 rollout | brownfield 점진, matrix R14·R15 |
+| TDD + Kanban | 단위 안정 + continuous flow | solo·small medium timeline, matrix R4 |
+| Spec-driven + Trunk-based | 명세 박제 + CI 게이트 (OpenAPI 정합) | API 중심·OSS, matrix R9·R13 |
+| MVC + Snapshot + Kanban | 정형 패턴 + UI 회귀 + 가벼운 PM | internal_tool 정석, matrix R10 |
+| Hexagonal + Contract testing | 외부 의존 격리 + 통합 회귀 검출 | fintech·health brownfield, matrix R17 |
+| Event Storming + Snapshot | 도메인 발굴 + UI 회귀 (workshop 직후 안정화) | 다도메인 + UI 재구축, matrix R17 |
 
 **default 시너지:** 시너지 표 미박제 조합도 valid — §2.2 충돌 표 검출 안 되면 사용 가능. 시너지 표는 "검증된 조합" 우선 추천 가이드.
 

@@ -1,6 +1,7 @@
 ---
 description: "methodology-advisor → 사용자 confirm → dharness factory 자동 인계 wrapper. 방법론 추천 + dharness factory 1회 호출로 일괄 박제."
 argument-hint: "<도메인 한 문장>"
+allowed-tools: ["SlashCommand", "Read", "Write", "Bash", "Glob", "Grep"]
 ---
 
 # /methodology-advisor:advise-and-build
