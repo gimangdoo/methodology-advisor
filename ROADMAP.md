@@ -26,9 +26,10 @@
 
 목표: dharness `intent-profile-schema.md`에 `workflow.methodology` enum 필드 추가 → advisor handoff yaml fragment의 `workflow.methodology` 필드 silent ignore 해소.
 
-### A1. `intent-profile-schema.md` 필드 추가 `[STATUS: blocked]`
+### A1. `intent-profile-schema.md` 필드 추가 `[STATUS: spec-ready]`
 
 위치: dharness repo (`gimangdoo/dharness` — 별 repo).
+patch spec: [docs/dharness-patch-spec.md](./docs/dharness-patch-spec.md) §A1.
 
 추가 필드 (handoff-template.md §2 박제):
 
@@ -45,9 +46,10 @@ workflow:
 - dharness `harness-validate` enum 검증 회로 추가
 - dharness CHANGELOG·minor version bump
 
-### A2. dharness Phase 2 grilling 분기 박제 `[STATUS: blocked]`
+### A2. dharness Phase 2 grilling 분기 박제 `[STATUS: spec-ready]`
 
 dharness Phase 2가 `workflow.methodology` 미박제 시 → `/methodology-advisor` sub-skill 호출 게이트 추가.
+patch spec: [docs/dharness-patch-spec.md](./docs/dharness-patch-spec.md) §A2.
 
 수락 조건:
 - dharness `references/grilling-loop.md` 또는 동등 위치에 분기 박제
@@ -67,10 +69,10 @@ dharness Phase 2가 `workflow.methodology` 미박제 시 → `/methodology-advis
 ### B1. e2e 운영 검증 `[STATUS: partial]`
 
 - B1-static: `[done]` (tests/static/B1-static-2026-05-24.md)
-- B1.1 자연어 trigger: `[pending]` (사용자 환경 필요)
-- B1.2 wrapper command: `[pending]` (사용자 환경 필요)
-- B1.3 dharness-sub: `[blocked]` (Track A1·A2 의존)
-- B1.4 실패 케이스 4종: `[pending]` (사용자 환경 필요)
+- B1.1 자연어 trigger: `[script-ready]` ([tests/manual/scenarios.md](./tests/manual/scenarios.md) §S1, 사용자 실행 대기)
+- B1.2 wrapper command: `[script-ready]` (§S2, 사용자 실행 대기)
+- B1.3 dharness-sub: `[script-ready, blocked]` (§S3 시뮬레이션은 가능, 실 통합 검증은 Track A 의존)
+- B1.4 실패 케이스 4종: `[script-ready]` (§S4, 사용자 실행 대기)
 
 본 plugin 코드는 1회도 실 실행 안 됨. 다음 시나리오 1회 dryrun + 결과 박제.
 

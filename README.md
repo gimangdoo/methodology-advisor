@@ -128,6 +128,8 @@ Current: `0.3.0`.
 
 - [ROADMAP.md](./ROADMAP.md) — high-level tracker (what + why + status) for the three remaining tracks.
 - [PLAN.md](./PLAN.md) — detailed execution plan (steps + acceptance + deliverables + effort + dependencies + risks).
+- [tests/manual/scenarios.md](./tests/manual/scenarios.md) — B1-runtime e2e dryrun scripts (4 scenarios + checklists + result templates).
+- [docs/dharness-patch-spec.md](./docs/dharness-patch-spec.md) — Track A patch specification for the dharness repo (`workflow.methodology` schema + Phase 2 sub-skill branch).
 
 ---
 
