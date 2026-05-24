@@ -115,7 +115,7 @@ intent_profile_patch:
     test_rigor: tdd                    # advisor 추천 enum
   workflow:
     methodology: ["DDD", "TDD", "Trunk-based"]   # 추천 조합
-    methodology_source: "methodology-advisor v0.1.0 (matrix-hit / matrix-miss)"
+    methodology_source: "methodology-advisor v0.2.0 (matrix-hit / matrix-miss)"
 meta:
   open_questions: []                   # advisor가 해결한 질문 박제
   user_confirmed_fields:

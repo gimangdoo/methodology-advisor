@@ -38,7 +38,7 @@ advisor Phase 4 출력 후 자동 진행 금지. 명시적 사용자 confirm 게
 [E] 편집 — 합성 1줄을 사용자가 수정 후 진행
 ```
 
-**doctrine 정합:** dharness "제안 + 승인" 모델 + Phase 10 자동 적용 금지 doctrine과 정합 ([[project-dharness-handoff-ica-absorption]] L37의 사용자 게이트 doctrine 유지).
+**doctrine 정합:** dharness "제안 + 승인" 모델 + Phase 10 자동 적용 금지 doctrine과 정합 — advisor도 dharness 호출 전 사용자 게이트 유지.
 
 사용자 응답 enum:
 - `Y` → Step 3 진행
