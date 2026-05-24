@@ -70,7 +70,7 @@ dharness Phase 2 grilling 중 advisor가 sub-skill로 호출됐을 때. 합성 1
 
 ```yaml
 # methodology-advisor handoff (dharness-sub mode)
-# version: 0.3.0
+# version: 0.3.1
 # matrix_hit: R4 | matrix-miss
 
 intent_profile_patch:
@@ -78,7 +78,7 @@ intent_profile_patch:
     test_rigor: <enum>                # none | smoke | unit | integration | tdd
   workflow:
     methodology: [<방법론1>, <방법론2>, ...]   # advisor 추천 조합
-    methodology_source: "methodology-advisor v0.3.0"
+    methodology_source: "methodology-advisor v0.3.1"
     methodology_matrix_row: "R4"      # matrix row id 또는 "matrix-miss"
 
 meta:

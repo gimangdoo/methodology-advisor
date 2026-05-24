@@ -9,7 +9,7 @@
       "name": "methodology-advisor",
       "source": "./plugins/methodology-advisor",
       "description": "Recommend software development methodology (TDD/DDD/BDD/Spec-driven/Kanban etc.) by project profile. Pairs with dharness factory — output a single sentence ready to feed into /harness:harness-new.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "category": "advisory"
     }
   ]

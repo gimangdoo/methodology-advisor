@@ -14,11 +14,12 @@
 
 ## 현재 상태 (2026-05-24)
 
-- v0.3.0 tag origin 푸시 대기 (commit 박제 완료)
+- v0.3.1 patch 박제 (gap #1 + #3 fix — doctrine 명시, 코드 동작 변경 X)
+- v0.3.0 origin 푸시 완료 (commit 602ce6f)
 - 플러그인 코드 박제 완료 (skill + 3 references + command + marketplace)
 - B1-static 정합성 점검 완료 (tests/static/B1-static-2026-05-24.md)
+- B1.1 자연어 trigger e2e 검증 완료 — 16 PASS / 1 partial / 1 N/A (tests/manual/e2e-trigger.md)
 - B2 시너지 표 +10 셀 박제 완료 (catalog §2.3: 15 → 25)
-- 본 시점 이후 실 사용·운영 데이터 0건 — B1-runtime 미수행
 
 ---
 

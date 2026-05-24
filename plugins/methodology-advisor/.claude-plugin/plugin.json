@@ -1,6 +1,6 @@
 {
   "name": "methodology-advisor",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Recommend a software development methodology (TDD/DDD/BDD/Spec-driven/Kanban etc.) based on project structure, purpose, features, and scale. Pairs with dharness factory: emits a single handoff sentence that can be fed straight into /harness:harness-new. Includes a decision matrix, a 24-item methodology catalog, and a wrapper command that chains advisor → user confirm → dharness.",
   "author": {
     "name": "gimangdoo"

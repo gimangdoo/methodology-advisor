@@ -33,6 +33,12 @@ dharness-sub 모드 진입 신호:
 
 **5축 신호 수집:** 사용자 발화에 이미 있는 신호는 스킵, 누락된 신호는 grilling-loop 패턴(1q-at-a-time + 추천 답안 ≥3개 + 선택지 enum + 자유 입력 옵션)으로 수집.
 
+**1q-at-a-time 엄수 룰 (필수):**
+- 단일 grilling step = 단일 축 단일 질문만. 다축 동시 박제 금지 (e.g. "Timeline과 Compliance는?" 같은 묶음 질문 X).
+- 신호 N개 누락 시 → N개 step 순차 진행 (사용자 응답 → 다음 step).
+- 예외 없음 — `timeline`·`compliance`·`quality_target` 같은 `constraints` 하위 필드도 각각 별 step.
+- 위반 시 사용자 확인 부담 ↑ + 응답 파싱 모호 (어느 축이 어느 답인지 매핑 실패 위험).
+
 | 축 | 필수 | enum 또는 자유 입력 |
 |----|------|-------------------|
 | `project_type` | ✓ | greenfield / brownfield |
@@ -102,6 +108,8 @@ dharness-sub 모드 진입 신호:
 [C] 박제만 — dharness 호출 없이 진행 (수동 사용 위함)
 ```
 
+**산출물 박제 추가 doctrine — standalone 모드의 `_handoff.md`도 dharness `intent_profile` 매핑 yaml 박제 (사용자에게는 합성 1줄만 제시).** 이유 = 사용자가 [A] 선택 시 dharness Phase 2가 발화를 재파싱하지만, [C] 선택 후 별도 세션에서 dharness 호출 시 advisor가 박제한 매핑을 그대로 read·merge 가능 — re-grilling 비용 회피. dharness-sub 모드 yaml fragment와 schema 동일 (`workflow.methodology` + `methodology_source` + `methodology_matrix_row`).
+
 ### Phase 4-sub: dharness intent_profile 필드 직접 박제 (dharness-sub 모드)
 
 standalone 모드의 Phase 4 대신 실행. dharness Phase 2 grilling에서 호출됐으므로 합성 1줄이 아니라 intent_profile 필드 yaml fragment를 출력한다.
@@ -115,7 +123,7 @@ intent_profile_patch:
     test_rigor: tdd                    # advisor 추천 enum
   workflow:
     methodology: ["DDD", "TDD", "Trunk-based"]   # 추천 조합
-    methodology_source: "methodology-advisor v0.3.0 (matrix-hit / matrix-miss)"
+    methodology_source: "methodology-advisor v0.3.1 (matrix-hit / matrix-miss)"
 meta:
   open_questions: []                   # advisor가 해결한 질문 박제
   user_confirmed_fields:
@@ -135,7 +143,7 @@ dharness Phase 2가 이 yaml을 read → `intent_profile.md` frontmatter에 merg
 |------|------|
 | `_workspace/_advisor/{ts}_signals.md` | Phase 0 수집 신호 5축 yaml |
 | `_workspace/_advisor/{ts}_recommendation.md` | Phase 2 top-3 + Phase 3 사용자 확정 |
-| `_workspace/_advisor/{ts}_handoff.md` | Phase 4 합성 1줄 + 옵션 A/B/C |
+| `_workspace/_advisor/{ts}_handoff.md` | Phase 4 합성 1줄 + 옵션 A/B/C + dharness `intent_profile` 매핑 yaml (dharness-sub schema와 동일) |
 
 **워크스페이스 디렉토리 미존재 시:** Phase 4 직전에 Bash로 `mkdir -p _workspace/_advisor/` 실행 후 Write로 산출물 박제. dharness factory가 같은 `_workspace/` 사용 → 공존 안전.
 

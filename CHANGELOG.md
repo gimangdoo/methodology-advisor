@@ -2,6 +2,25 @@
 
 All notable changes to this plugin are documented in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning is [SemVer](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] — 2026-05-24
+
+B1-runtime S1 dryrun에서 발견된 doctrine gap 2건 박제. 코드 동작 변경 X, 문서·doctrine 명시 patch.
+
+### Fixed
+
+- `SKILL.md §Phase 0` — grilling-loop `1q-at-a-time 엄수 룰` 명시 추가. S1에서 `constraints` 하위(Timeline + Compliance)를 동시 grilling한 사례 재발 방지. 단일 step = 단일 축 단일 질문, 다축 동시 박제 금지. (gap #1, severity=med)
+- `SKILL.md §Phase 4` + `§산출물` — standalone 모드의 `_handoff.md`에도 dharness `intent_profile` 매핑 yaml 박제 doctrine 명시. dharness-sub schema와 동일 (`workflow.methodology` + `methodology_source` + `methodology_matrix_row`). [C] 옵션 후 별 세션 호출 시 re-grilling 회피 회로 박제. (gap #3, severity=low)
+
+### Changed
+
+- version literal `v0.3.0` → `v0.3.1` (plugin.json, marketplace.json, SKILL.md Phase 4-sub yaml, handoff-template.md §2, README "Current")
+
+### Known limitations (이월)
+
+- `hybrid_reason` 자유 텍스트 schema 정형화 → v0.4.0 후보 (gap #2)
+- `workflow.methodology` enum dharness 측 schema patch 미진행 (Track A 의존)
+- B1-runtime S2~S4 dryrun 미수행
+
 ## [0.3.0] — 2026-05-24
 
 B1-static 정합성 점검 + B2 시너지 표 확장 + advisory gap 4건 박제. v0.2.0 release 당일 즉시 후속 patch.
